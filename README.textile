@@ -1,0 +1,11 @@
+h1. mustachio
+
+Put a mustache on some JSON. "Salvador Dalí would be proud":http://en.wikipedia.org/wiki/File:Salvador_Dali_NYWTS.jpg.
+
+h2. Reasoning
+
+Mustache.js is great, but sometimes you can't quite tell why your template isn't working with the JSON you're getting. Often times, what you really wish you had is a handy way to edit both the JSON and the template, side-by-side, and see the result. That's what mustachio does for you.
+
+h2. Licensing
+
+You're welcome to use re:form.ed under the terms of the "Apache License, version 2.0":http://www.apache.org/licenses/LICENSE-2.0. If you use it, we'd love to hear about it: "@bigbluehat":http://twitter.com/bigbluehat

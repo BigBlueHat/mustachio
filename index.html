@@ -1,0 +1,104 @@
+<!--
+<!DOCTYPE html>
+this is really an HTML5 doc (or should be!), but forcing quirks mode to get
+height: 100% to work...a real bother to be sure...
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>mustachio</title>
+	<link rel="stylesheet" type="text/css" href="mustachio.css" />
+</head>
+<body>
+<a href="http://github.com/BigBlueHat/mustachio"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<h1>mustachio by <a href="http://www.bigbluehat.com/">Big<em>Blue</em>Hat</a>
+    <span class="download">
+      <a href="http://github.com/BigBlueHat/mustachio/zipball/master">
+        <img border="0" width="70" src="http://github.com/images/modules/download/zip.png" /></a>
+      <a href="http://github.com/BigBlueHat/mustachio/tarball/master">
+        <img border="0" width="70" src="http://github.com/images/modules/download/tar.png" /></a>
+    </span>
+</h1>
+<h5>converting JSON into an HTML Form and back</h5>
+
+<div style="overflow:hidden">
+<div class="left">
+				<div><a id="examplejson" href="">Example JSON</a></div>
+	<textarea id="json">
+	{
+	   "id": "507401517",
+	   "name": "Benjamin Young",
+	   "first_name": "Benjamin",
+	   "last_name": "Young",
+	   "link": "http://www.facebook.com/benjaminyoung",
+	   "about": "Dreamer, Inventor, Web Developer. I run this: http://bigbluehat.com/ and build this: http://blueinkcms.com/",
+	   "location": {
+	      "id": 107600062603098,
+	      "name": "Greenville, South Carolina"
+	   },
+	   "work": [
+	      {
+	         "employer": {
+	            "id": 111737955518707,
+	            "name": "BigBlueHat"
+	         },
+	         "start_date": "2003-07"
+	      }
+	   ],
+	   "meeting_for": [
+	         "Friendship",
+	         "Networking"
+		]
+	}
+	</textarea>
+
+	<div class="buttons">
+	<input type="button" value="pretty the JSON" id="prettythis" />
+	</div>
+</div>
+<div class="right">
+<div>Template Code</div>
+
+<textarea id="template">
+<h3>{{name}}</h3>
+<ul>
+{{#work}}
+<li>{{#employer}}{{name}} {{/employer}} - {{start_date}}</li>
+{{/work}}
+</ul>
+</textarea>
+
+	<div class="buttons">
+	<input type="button" value="mustachio" id="mustachio" />
+	</div>
+</div>
+</div>
+
+<div id="output">
+
+</div>
+
+	<script type="text/javascript" src="js/jquery.1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.json-2.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mustache.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+    // JSON loaders
+		$('#examplejson').click(function(ev) {
+				ev.preventDefault();
+				$.get('example.json',null,function(data) { $('#json').val(data); });
+		});
+
+		// clean up the JSON code
+		$('#prettythis').click(function() {
+			$('#input').val(JSON.stringify($.parseJSON($('#input').val()), null, '\t'));
+		});
+
+		$('#mustachio').click(function() {
+			$('#output').html($.mustache($('#template').val(), $.parseJSON($('#json').val())));
+		});
+        });
+	</script>
+</body>
+</html>
